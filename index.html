@@ -1,15 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Data</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body>
-    <div id="chartContainer">
-        <canvas id="salesChart"></canvas>
-    </div>
-    <script src="public/script.js"></script>
-</body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/material-dashboard@3.0.9/assets/css/material-dashboard.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="public/css/style.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/material-dashboard@3.0.9/assets/js/material-dashboard.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js" integrity="sha512-nKXmKvJyiGQy343jatQlzDprflyB5c+tKCzGP3Uq67v+lmzfnZUi/ZT+fc6ITZfSC5HhaBKUIvr/nTLCV+7F+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  </head>
+  <body>
+    <section class="sidebar" id="sidebar">
+      <div class="logo">
+        <button id="toggleBtn">☰</button>
+      </div>
+
+      <ul class="menu">
+        <li class="active">
+          <span class="material-icons">home</span>
+          <a href="#">Accueil</a>
+        </li>
+        <li>
+          <span class="material-icons">bar_chart</span>
+          <a href="#">Statistiques</a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="content">
+      <!-- Accueil -->
+      <article>
+        <div id="chartContainer">
+          <h2
+            style="
+              color: #ff7f50;
+              margin-bottom: 20px;
+              font-size: 24px;
+              font-weight: 600;
+              text-align: center;
+            "
+          ></h2>
+          <svg id="chart"></svg>
+        </div>
+      </article>
+      <!-- Stats -->
+      <article></article>
+    </section>
+    <script src="public/js/script.js"></script>
+    <script src="public/js/sidebar.js"></script>
+  </body>
 </html>
