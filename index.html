@@ -23,8 +23,21 @@
     <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
   </head>
   <body>
+    <!-- Loading -->
+    <div id="loadingScreen" class="loading-screen">
+      <div class="loading-container">
+        <div class="loading-text">
+          <h2 id="loadingPercent">0%</h2>
+          <p>Chargement des données</p>
+          <div class="loading-progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="particles-js"></div>
-    <section class="sidebar" id="sidebar">
+    <section class="sidebar closed" id="sidebar">
       <div class="logo">
         <button id="toggleBtn">☰</button>
       </div>
@@ -43,43 +56,237 @@
 
     <section class="content">
       <!-- Accueil -->
-      <article style="display: none">
-        <h4 class="mb-0" id="successRate">0%</h4>
-        <span id="totalCountTitle">0</span>
+      <article id="accueil" class="">
+        <div class="container-fluid">
+          <div class="row flex-grow-1 mt-1">
+            <div class="col-lg-6 d-flex">
+              <div class="row h-100 w-100 m-0 pb-0">
+                <div class="col-6 p-1">
+                  <div class="card h-100">
+                    <div class="card-header p-2 pt-1 pb-0">
+                      <div
+                        class="icon icon-md icon-shape bg-white shadow text-center border-radius-xl mt-n4 position-absolute"
+                        style="display: flex; justify-content: center; width: 56px; height: 56px;"
+                      >
+                        <i
+                          class="material-icons"
+                          style="font-size: 24px; line-height: 1; color: #ff6b35;"
+                          >trending_up</i
+                        >
+                      </div>
+                      <div class="text-end pt-1">
+                        <p
+                          class="text-xs mb-0 text-capitalize"
+                          style="font-size: 10px"
+                        >
+                          Taux de succès
+                        </p>
+                        <h6
+                          class="mb-0"
+                          id="successRateCard"
+                          style="font-size: 16px"
+                        >
+                          0%
+                        </h6>
+                      </div>
+                    </div>
+                    <hr class="dark horizontal my-0" />
+                    <div class="card-footer p-1">
+                      <p class="mb-0" style="font-size: 9px">
+                        <span class="text-success font-weight-bolder"
+                          >&nbsp;&nbsp;&nbsp;Tendance positive ce mois-ci</span
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 p-1">
+                  <div class="card h-100">
+                    <div class="card-header p-2 pt-1 pb-0">
+                      <div
+                        class="icon icon-md icon-shape bg-white shadow text-center border-radius-xl mt-n4 position-absolute"
+                        style="display: flex; justify-content: center; width: 56px; height: 56px;"
+                      >
+                        <i
+                          class="material-icons"
+                          style="font-size: 24px; line-height: 1; color: #ff6b35;"
+                          >check_circle</i
+                        >
+                      </div>
+                      <div class="text-end pt-1">
+                        <p
+                          class="text-xs mb-0 text-capitalize"
+                          style="font-size: 10px"
+                        >
+                          Problèmes SAT
+                        </p>
+                        <h6
+                          class="mb-0"
+                          id="satCount"
+                          style="font-size: 16px"
+                        >
+                          0
+                        </h6>
+                      </div>
+                    </div>
+                    <hr class="dark horizontal my-0" />
+                    <div class="card-footer p-1">
+                      <p class="mb-0" style="font-size: 9px">
+                        <span class="text-success font-weight-bolder">
+                          &nbsp;&nbsp;&nbsp;<span id="satPercent">0%</span> résolus avec succès</span
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 p-1 pb-0">
+                  <div class="card h-100">
+                    <div class="card-header p-2 pt-1 pb-0">
+                      <div
+                        class="icon icon-md icon-shape bg-white shadow text-center border-radius-xl mt-n4  position-absolute"
+                        style="display: flex; justify-content: center; width: 56px; height: 56px;"
+                      >
+                        <i
+                          class="material-icons"
+                          style="font-size: 24px; line-height: 1; color: #ff6b35;"
+                          >cancel</i
+                        >
+                      </div>
+                      <div class="text-end pt-1">
+                        <p
+                          class="text-xs mb-0 text-capitalize"
+                          style="font-size: 10px"
+                        >
+                          Problèmes UNSAT
+                        </p>
+                        <h6
+                          class="mb-0"
+                          id="unsatCount"
+                          style="font-size: 16px"
+                        >
+                          0
+                        </h6>
+                      </div>
+                    </div>
+                    <hr class="dark horizontal my-0" />
+                    <div class="card-footer p-1">
+                      <p class="mb-0" style="font-size: 9px">
+                        <span class="text-info font-weight-bolder">
+                          &nbsp;&nbsp;&nbsp;<span id="unsatPercent">0%</span> impossibles à résoudre</span
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 p-1 pb-0">
+                  <div class="card h-100">
+                    <div class="card-header p-2 pt-1 pb-0">
+                      <div
+                        class="icon icon-md icon-shape bg-white shadow text-center border-radius-xl mt-n4  position-absolute"
+                        style="display: flex; justify-content: center; width: 56px; height: 56px;"
+                      >
+                        <i
+                          class="material-icons"
+                          style="font-size: 24px; line-height: 1; color: #ff6b35;"
+                          >help_outline</i
+                        >
+                      </div>
+                      <div class="text-end pt-1">
+                        <p
+                          class="text-xs mb-0 text-capitalize"
+                          style="font-size: 10px"
+                        >
+                          Total problèmes
+                        </p>
+                        <h6
+                          class="mb-0"
+                          id="totalCount"
+                          style="font-size: 16px"
+                        >
+                          0
+                        </h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 d-flex">
+              <div class="card flex-grow-1">
+                <div class="card-body p-1 flex-grow-1">
+                  <div id="heatmapContainer" class="h-100">
+                    <svg id="heatmapChart" width="100%" height="100%"></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-1">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header p-1 pt-1 pb-0">
+                  <div class="text-center">
+                    <p class="text-xs mb-0 text-muted" style="font-size: 9px">
+                      Taux de succès des solveurs selon la taille des problèmes
+                    </p>
+                  </div>
+                </div>
+                <div class="card-body p-0" style="height: 350px">
+                  <div id="timelineContainer" class="h-100 w-100">
+                    <svg id="timelineChart" width="100%" height="100%"></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="position-absolute"
+          style="bottom: 5px; right: 20px; z-index: 100"
+        >
+          <button id="advancedStatsBtn" class="btn btn-orange">
+            Statistiques avancées
+            <i class="material-icons ms-2" style="font-size: 18px"
+              >arrow_forward</i
+            >
+          </button>
+        </div>
       </article>
 
       <!-- Stats -->
-      <article>
-        <div class="container-fluid py-1">
-          <div class="row">
-            <div class="col-xl-6 col-sm-6">
-              <div class="card">
-                <div class="card-header p-1 pt-1">
-                  <div class="text-end pt-1">
-                    <p class="text-xs mb-0 text-capitalize">
+      <article style="display: none" id="stats">
+        <div class="container-fluid py-1" style="height: 100%; display: flex; flex-direction: column; gap: 6px;">
+          <div class="row flex-grow-1 mb-1" style="min-height: 0;">
+            <div class="col-xl-6 col-sm-6 pe-2">
+              <div class="card h-100">
+                <div class="card-header p-1 pt-1 pb-0">
+                  <div class="text-center">
+                    <p class="text-xs mb-0 text-capitalize" style="font-size: 10px;">
                       Répartition des statuts
                     </p>
                   </div>
                 </div>
-                <div class="card-body px-0 pb-0">
-                  <div id="pieContainer" class="p-1" style="height: 35vh">
+                <div class="card-body p-1 flex-grow-1">
+                  <div id="pieContainer" class="h-100">
                     <svg id="pieChart" width="100%" height="100%"></svg>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="col-xl-6 col-sm-6">
-              <div class="card">
-                <div class="card-header p-1 pt-1">
-                  <div class="text-end pt-1">
-                    <p class="text-xs mb-0 text-capitalize">
+            <div class="col-xl-6 col-sm-6 ps-2">
+              <div class="card h-100">
+                <div class="card-header p-1 pt-1 pb-0">
+                  <div class="text-center">
+                    <p class="text-xs mb-0 text-capitalize" style="font-size: 10px;">
                       Performances des solveurs
                     </p>
                   </div>
                 </div>
-                <div class="card-body px-0 pb-0">
-                  <div id="scatterContainer" class="p-1" style="height: 35vh">
+                <div class="card-body p-1 flex-grow-1">
+                  <div id="scatterContainer" class="h-100">
                     <svg id="scatterChart" width="100%" height="100%"></svg>
                   </div>
                 </div>
@@ -87,18 +294,18 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row mt-1" style="height: 42%; min-height: 0;">
             <div class="col-12">
-              <div class="card">
-                <div class="card-header p-1 pt-1">
-                  <div class="text-end pt-1">
-                    <p class="text-xs mb-0 text-capitalize">
+              <div class="card h-100">
+                <div class="card-header p-1 pt-1 pb-0 ">
+                  <div class="text-center">
+                    <p class="text-xs mb-0 text-capitalize" style="font-size: 10px;">
                       Top 10 des solveurs
                     </p>
                   </div>
                 </div>
-                <div class="card-body px-0 pb-0" style="height: 25vh">
-                  <div id="chartContainer" class="p-1 h-100">
+                <div class="card-body p-1 flex-grow-1">
+                  <div id="chartContainer" class="h-100">
                     <svg id="chart" width="100%" height="100%"></svg>
                   </div>
                 </div>
@@ -109,6 +316,7 @@
       </article>
     </section>
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="public/js/loader.js"></script>
     <script src="public/js/charts.js"></script>
     <script src="public/js/script.js"></script>
     <script src="public/js/sidebar.js"></script>
