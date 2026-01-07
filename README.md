@@ -13,6 +13,14 @@
 - **Navigation sidebar** intuitive
 - **Effets de particules** en arrière-plan
 
+## 📸 Aperçu
+
+![Page d'accueil](img/exemple1.png)
+*Interface principale avec métriques et graphiques interactifs*
+
+![Statistiques avancées](img/exemple2.png)
+*Vue détaillée avec visualisations avancées et classement des solveurs*
+
 ## 🛠️ Technologies
 
 | Frontend | Visualisation | Styling |
