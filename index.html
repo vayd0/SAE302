@@ -18,11 +18,12 @@
       href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"
     />
     <link rel="stylesheet" href="public/css/style.css" />
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/material-dashboard@3.0.9/assets/js/material-dashboard.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.min.js" integrity="sha512-nKXmKvJyiGQy343jatQlzDprflyB5c+tKCzGP3Uq67v+lmzfnZUi/ZT+fc6ITZfSC5HhaBKUIvr/nTLCV+7F+Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
   </head>
   <body>
+    <div id="particles-js"></div>
     <section class="sidebar" id="sidebar">
       <div class="logo">
         <button id="toggleBtn">☰</button>
@@ -42,24 +43,75 @@
 
     <section class="content">
       <!-- Accueil -->
+      <article style="display: none">
+        <h4 class="mb-0" id="successRate">0%</h4>
+        <span id="totalCountTitle">0</span>
+      </article>
+
+      <!-- Stats -->
       <article>
-        <div id="chartContainer">
-          <h2
-            style="
-              color: #ff7f50;
-              margin-bottom: 20px;
-              font-size: 24px;
-              font-weight: 600;
-              text-align: center;
-            "
-          ></h2>
-          <svg id="chart"></svg>
+        <div class="container-fluid py-1">
+          <div class="row">
+            <div class="col-xl-6 col-sm-6">
+              <div class="card">
+                <div class="card-header p-1 pt-1">
+                  <div class="text-end pt-1">
+                    <p class="text-xs mb-0 text-capitalize">
+                      Répartition des statuts
+                    </p>
+                  </div>
+                </div>
+                <div class="card-body px-0 pb-0">
+                  <div id="pieContainer" class="p-1" style="height: 35vh">
+                    <svg id="pieChart" width="100%" height="100%"></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-6 col-sm-6">
+              <div class="card">
+                <div class="card-header p-1 pt-1">
+                  <div class="text-end pt-1">
+                    <p class="text-xs mb-0 text-capitalize">
+                      Performances des solveurs
+                    </p>
+                  </div>
+                </div>
+                <div class="card-body px-0 pb-0">
+                  <div id="scatterContainer" class="p-1" style="height: 35vh">
+                    <svg id="scatterChart" width="100%" height="100%"></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-header p-1 pt-1">
+                  <div class="text-end pt-1">
+                    <p class="text-xs mb-0 text-capitalize">
+                      Top 10 des solveurs
+                    </p>
+                  </div>
+                </div>
+                <div class="card-body px-0 pb-0" style="height: 25vh">
+                  <div id="chartContainer" class="p-1 h-100">
+                    <svg id="chart" width="100%" height="100%"></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
-      <!-- Stats -->
-      <article></article>
     </section>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="public/js/charts.js"></script>
     <script src="public/js/script.js"></script>
     <script src="public/js/sidebar.js"></script>
+    <script src="public/js/background.js"></script>
   </body>
 </html>
